@@ -2,28 +2,37 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Basketball Scoreboard</title>
+<title>OBS Counter Overlay</title>
+<!-- Google Font Oswald -->
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
 <style>
-    body { background: black; color: white; font-family: sans-serif; text-align:center; }
-    .score { font-size: 100px; margin: 50px; }
+    body {
+        margin: 0;
+        background: transparent;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+    }
+    .score-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 200px;
+        height: 100vh;
+        color: white;
+        font-size: 150px;
+        font-weight: bold;
+        font-family: 'Oswald', sans-serif; /* Oswald za številke */
+    }
 </style>
 </head>
 <body>
-    <div>
-        <span id="home" class="score">0</span> - 
-        <span id="away" class="score">0</span>
-    </div>
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    const socket = io();
-    const homeEl = document.getElementById('home');
-    const awayEl = document.getElementById('away');
+<div class="score-container">
+    <div id="scoreA">0</div>
+    <div id="scoreB">0</div>
+</div>
 
-    socket.on('updateScore', (data) => {
-        homeEl.textContent = data.home;
-        awayEl.textContent = data.away;
-    });
-</script>
+<!-- Socket.IO in overlay.js -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/overlay.js"></script>
 </body>
 </html>
