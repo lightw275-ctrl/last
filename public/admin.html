@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Scoreboard</title>
+<style>
+    body { font-family: sans-serif; text-align:center; margin-top:50px; }
+    input { font-size:20px; width:100px; margin:10px; }
+    button { font-size:20px; }
+</style>
+</head>
+<body>
+<h1>Admin Panel</h1>
+<div>
+    <label>Home: <input type="number" id="homeInput" value="0"></label>
+    <label>Away: <input type="number" id="awayInput" value="0"></label>
+</div>
+<button id="updateBtn">Update Score</button>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    const homeInput = document.getElementById('homeInput');
+    const awayInput = document.getElementById('awayInput');
+    const updateBtn = document.getElementById('updateBtn');
+
+    updateBtn.addEventListener('click', () => {
+        const data = { home: parseInt(homeInput.value), away: parseInt(awayInput.value) };
+        socket.emit('updateScore', data);
+    });
+</script>
+</body>
+</html>
