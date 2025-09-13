@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basketball Scoreboard</title>
+<style>
+    body { background: black; color: white; font-family: sans-serif; text-align:center; }
+    .score { font-size: 100px; margin: 50px; }
+</style>
+</head>
+<body>
+    <div>
+        <span id="home" class="score">0</span> - 
+        <span id="away" class="score">0</span>
+    </div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    const homeEl = document.getElementById('home');
+    const awayEl = document.getElementById('away');
+
+    socket.on('updateScore', (data) => {
+        homeEl.textContent = data.home;
+        awayEl.textContent = data.away;
+    });
+</script>
+</body>
+</html>
